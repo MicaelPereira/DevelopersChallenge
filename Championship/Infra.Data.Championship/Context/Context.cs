@@ -14,7 +14,9 @@ namespace Infra.Data.Championship.Context
     {
         public AppContext()
             : base("Championship")
-        { }
+        {
+            Database.SetInitializer<Context>(new CreateDatabaseIfNotExists<Context>());
+        }
         public DbSet<League> Leagues { get; set; }
         public DbSet<Result> Results { get; set; }
         public DbSet<Team> Teams { get; set; }
