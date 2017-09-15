@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Infra.Data.Championship.Context
 {
-    public class Context : DbContext
+    public class AppContext : DbContext
     {
-        public Context()
+        public AppContext()
             : base("Championship")
         { }
         public DbSet<League> Leagues { get; set; }

@@ -5,14 +5,14 @@ namespace Infra.Data.Championship.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Infra.Data.Championship.Context.Context>
+    internal sealed class Configuration : DbMigrationsConfiguration<Infra.Data.Championship.Context.AppContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Infra.Data.Championship.Context.Context context)
+        protected override void Seed(Infra.Data.Championship.Context.AppContext context)
         {
             //  This method will be called after migrating to the latest version.
 
