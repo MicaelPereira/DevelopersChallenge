@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{4CFF2C0F-F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Data.Championship", "Infra.Data.Championship\Infra.Data.Championship.csproj", "{D0BC36AB-DAE8-475E-8DDF-D55CA94A096B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Championship", "Application.Championship\Application.Championship.csproj", "{CA9C2CB0-EA93-4E86-909D-5373ADB15AE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{D0BC36AB-DAE8-475E-8DDF-D55CA94A096B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0BC36AB-DAE8-475E-8DDF-D55CA94A096B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0BC36AB-DAE8-475E-8DDF-D55CA94A096B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA9C2CB0-EA93-4E86-909D-5373ADB15AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA9C2CB0-EA93-4E86-909D-5373ADB15AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA9C2CB0-EA93-4E86-909D-5373ADB15AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA9C2CB0-EA93-4E86-909D-5373ADB15AE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,5 +52,6 @@ Global
 		{A4601B00-5EFA-47AA-BF0D-64FD721CBDFC} = {8A8A8BC4-C921-4B17-B0CC-FE6E8141ED61}
 		{4CFF2C0F-F287-4EB2-B369-6A6DA5F11197} = {43CDC27B-EA57-4FE3-98B8-F121AD335A39}
 		{D0BC36AB-DAE8-475E-8DDF-D55CA94A096B} = {4CFF2C0F-F287-4EB2-B369-6A6DA5F11197}
+		{CA9C2CB0-EA93-4E86-909D-5373ADB15AE6} = {C6A47746-9C3D-44FC-8976-8B8FECE16F20}
 	EndGlobalSection
 EndGlobal
