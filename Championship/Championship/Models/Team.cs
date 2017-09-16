@@ -9,6 +9,6 @@ namespace Championship.Models
     {
         public string Name { get; set; }
         public League League { get; set; }
-        public int IdLeague { get; set; }
+        public int? IdLeague { get; set; }
     }
 }

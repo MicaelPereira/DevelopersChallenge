@@ -19,7 +19,7 @@ namespace Infra.Data.Championship.EntityConfig
             Property(l => l.UpdatedDate);
             Property(l => l.Name).IsRequired();
 
-            HasRequired(p => p.League)
+            HasOptional(p => p.League)
                 .WithMany()
                 .HasForeignKey(p => p.IdLeague);
         }

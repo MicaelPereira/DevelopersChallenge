@@ -10,6 +10,6 @@ namespace Domain.Championship.Entities
     {
         public string Name { get; set; }
         public virtual League League { get; set; }
-        public int IdLeague { get; set; }
+        public int? IdLeague { get; set; }
     }
 }

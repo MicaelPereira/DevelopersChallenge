@@ -9,7 +9,7 @@ namespace Infra.Data.Championship.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Infra.Data.Championship.Context.AppContext context)

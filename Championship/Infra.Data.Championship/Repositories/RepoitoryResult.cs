@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Data.Championship.Repositories
 {
-    public class RepoitoryResult : RepositoryBase<Result>, IRepositoryResult
+    public class RepositoryResult : RepositoryBase<Result>, IRepositoryResult
     {
     }
 }
