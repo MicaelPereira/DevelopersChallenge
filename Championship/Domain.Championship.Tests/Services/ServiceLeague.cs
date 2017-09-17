@@ -24,6 +24,7 @@ namespace Domain.Championship.Services.Tests
         {
             serviceLeague = new ServiceLeague(_RepositoryLeague.Object, _RepositoryTeam.Object);
         }
+
         [TestMethod()]
         public void AddWithTeams()
         {
@@ -33,8 +34,9 @@ namespace Domain.Championship.Services.Tests
             var newLeague = serviceLeague.AddWithTeams(fakeLeague());
 
             Assert.IsNotNull(newLeague);
+            Assert.AreEqual(0, newLeague.Exceptions.Count);
             Assert.AreEqual("League Test", newLeague.Name);
-            Assert.AreEqual(2, newLeague.Id);
+            Assert.AreEqual(2, newLeague.Id);            
         }
 
         public League fakeLeague()

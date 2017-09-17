@@ -24,24 +24,26 @@ namespace Domain.Championship.Services
 
         public League AddWithTeams(League league)
         {
-            using (TransactionScope scope = new TransactionScope())
+            if (!league.IsOddTeam())
             {
-                List<Team> teams = new List<Team>();
-                teams.AddRange(league.Teams);
-                league.Teams = new List<Team>();
-                var newLeague = this.Add(league);
-
-                foreach (var team in teams)
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    var teamComplete = this._repositoryTeam.GetById(team.Id);
-                    teamComplete.IdLeague = newLeague.Id;
-                    this._repositoryTeam.Update(teamComplete);
+                    List<Team> teams = new List<Team>();
+                    teams.AddRange(league.Teams);
+                    league.Teams = new List<Team>();
+                    var newLeague = this.Add(league);
+
+                    foreach (var team in teams)
+                    {
+                        var teamComplete = this._repositoryTeam.GetById(team.Id);
+                        teamComplete.IdLeague = newLeague.Id;
+                        this._repositoryTeam.Update(teamComplete);
+                    }
+                    newLeague.Teams.AddRange(teams);
+                    league = newLeague;
+                    scope.Complete();
                 }
-                newLeague.Teams.AddRange(teams);
-                league = newLeague;
-                scope.Complete();
-            }
-                
+            }    
             return league;
         }
 
