@@ -17,9 +17,9 @@ namespace Application.Championship
             _serviceBase = serviceBase;
         }
 
-        public void Add(TEntity obj)
+        public TEntity Add(TEntity obj)
         {
-            _serviceBase.Add(obj);
+            return _serviceBase.Add(obj);
         }
 
         public TEntity GetById(int id)

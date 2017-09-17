@@ -17,6 +17,9 @@ namespace Application.Championship
         {
             _serviceTeam = serviceTeam;
         }
-
+        public IEnumerable<Team> GetWithoutLeague()
+        {
+            return _serviceTeam.GetWithoutLeague();
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace Application.Championship.Interface
 {
     public interface IAppServiceLeague : IAppServiceBase<League>
     {
-
+        //TODO: Refactory
+        //IEnumerable<League> GetAllWithTeams();
+        League GetByIdWithTeams(int id);
     }
 }

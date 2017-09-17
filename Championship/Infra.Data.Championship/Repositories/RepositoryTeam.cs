@@ -10,5 +10,14 @@ namespace Infra.Data.Championship.Repositories
 {
     public class RepositoryTeam : RepositoryBase<Team>, IRepositoryTeam
     {
+        public IEnumerable<Team> GetWithoutLeague()
+        {
+            return Db.Teams.Where(t => t.League == null);
+        }
+
+        public IEnumerable<Team> GetWithLeague(int idLeague)
+        {
+            return Db.Teams.Where(t => t.IdLeague == idLeague);
+        }
     }
 }

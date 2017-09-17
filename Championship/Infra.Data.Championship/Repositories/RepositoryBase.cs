@@ -13,10 +13,11 @@ namespace Infra.Data.Championship.Repositories
     {
         protected AppContext Db = new AppContext();
 
-        public void Add(TEntity obj)
+        public TEntity Add(TEntity obj)
         {
             Db.Set<TEntity>().Add(obj);
             Db.SaveChanges();
+            return obj;
         }
 
         public TEntity GetById(int id)

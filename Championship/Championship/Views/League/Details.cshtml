@@ -5,54 +5,105 @@
 }
 
 <h2>Details</h2>
+<style>
+    .tools { display: none; }
+    .label { color: #000; }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="row">
+    <div class="col-md-3">
+    </div>
+    @if (Model.Teams != null)
+    {
+        int iteratorTeam = 0;
+        string nameOfTheTeam = string.Empty;
 
-<div>
-    <h4>League</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
+        foreach (var team in Model.Teams)
+        {
+            if (iteratorTeam == 0)
+            {
+                nameOfTheTeam = team.Name;
+            }
+            else
+            {
+                nameOfTheTeam += "," + team.Name;
+            }
+            iteratorTeam++;
+        }
+        var arr1 = nameOfTheTeam.Split(',');
+        var arr = new string[,] {  };
+        <input type="hidden" value="@nameOfTheTeam" id="hdnTeams" />
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
+    <div class="col-md-9">
+        <div id="save">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedDate)
-        </dt>
+            <script type="text/javascript">
+                function mountArray() {
+                    var arrTeams = $("#hdnTeams").val().split(",");
+                    var arrPerPlay = [];
+                    var j = 0, l = 0;
+                    
+                    arrPerPlay[j] = [];
+                    for (var i = 0; i < arrTeams.length; i++) {
+                        var value = arrTeams[i];
+                        arrPerPlay[j][l] = value;
 
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedDate)
-        </dd>
+                        if (l == 1) {
+                            l = 0;
+                            j++;
+                            if (i < arrTeams.length - 1)
+                                arrPerPlay[j] = [];
+                        }
+                        else {
+                            l++;
+                        }
+                    }
+                    return arrPerPlay;
+                }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                
+                var saveData = {
+                teams : mountArray(),
+                results: [
+                    [
+                        //Array per steps
+                    ]
+                ]
+            };
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            /* Called whenever bracket is modified
+                *
+                * data:     changed bracket object in format given to init
+                * userData: optional data given when bracket is created.
+                */
+            function saveFn(data, userData) {
+                //var json = JSON.stringfy(data)
+                //$('#saveOutput').text('POST '+userData+' '+json)
+                //console.log('passou')
+                /* You probably want to do something like this
+                jQuery.ajax("rest/"+userData, {contentType: 'application/json',
+                                                dataType: 'json',
+                                                type: 'post',
+                                                data: json})
+                */
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SumTeams)
-        </dt>
+            $(function () {
+                var container = $('div#save .demo')
+                container.bracket({
+                    init: saveData,
+                    save: saveFn,
+                    userData: "http://myapi"
+                })
 
-        <dd>
-            @Html.DisplayFor(model => model.SumTeams)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsRandom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsRandom)
-        </dd>
-
-    </dl>
+                /* You can also inquiry the current data */
+                var data = container.bracket('data')
+                //debugger;
+                console.log(JSON.stringfy(data))
+            });
+            </script>
+            <div class="demo"> </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

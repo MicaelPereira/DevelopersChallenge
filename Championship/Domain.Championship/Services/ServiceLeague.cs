@@ -12,10 +12,21 @@ namespace Domain.Championship.Services
     public class ServiceLeague : ServiceBase<League>, IServiceLeague
     {
         IRepositoryLeague _repositoryLeague;
-        public ServiceLeague(IRepositoryLeague repositoryLeague)
+        IRepositoryTeam _repositoryTeam;
+        public ServiceLeague(IRepositoryLeague repositoryLeague, IRepositoryTeam repositoryTeam)
             : base(repositoryLeague)
         {
             _repositoryLeague = repositoryLeague;
+            _repositoryTeam = repositoryTeam;
+
+        }
+
+        public League GetByIdWithTeams(int id)
+        {
+            var league = _repositoryLeague.GetById(id);
+            league.Teams = new List<Team>();
+            league.Teams.AddRange(_repositoryTeam.GetWithLeague(league.Id));
+            return league;
 
         }
     }

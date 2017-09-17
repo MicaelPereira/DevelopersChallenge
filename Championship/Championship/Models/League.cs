@@ -12,5 +12,6 @@ namespace Championship.Models
         public bool IsRandom { get; set; }
         public List<Team> Teams { get; set; }
         public List<Result> Results { get; set; }
+        public string hdnTeamsInLeague { get; set; }
     }
 }

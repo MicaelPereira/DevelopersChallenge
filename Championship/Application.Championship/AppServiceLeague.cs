@@ -12,11 +12,28 @@ namespace Application.Championship
     public class AppServiceLeague : AppServiceBase<League>, IAppServiceLeague
     {
         readonly IServiceLeague _serviceLeague;
-        public AppServiceLeague(IServiceLeague serviceLeague)
+        readonly IServiceTeam _serviceTeam;
+        public AppServiceLeague(IServiceLeague serviceLeague, IServiceTeam serviceTeam)
             : base(serviceLeague)
         {
             _serviceLeague = serviceLeague;
+            _serviceTeam = serviceTeam;
         }
 
+        public League GetByIdWithTeams(int id)
+        {
+            return _serviceLeague.GetByIdWithTeams(id);
+        }
+
+        //TODO:Refactory
+        //public IEnumerable<League> GetAllWithTeams()
+        //{
+        //    var leagues = _serviceLeague.GetAll();
+        //    foreach (var league in leagues)
+        //    {
+        //        league.Teams.AddRange(_serviceTeam.GetAll());
+        //    }
+        //    return leagues;
+        //}
     }
 }

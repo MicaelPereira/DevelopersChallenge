@@ -18,5 +18,10 @@ namespace Domain.Championship.Services
             _repositoryTeam = repositoryTeam;
 
         }
+
+        public IEnumerable<Team> GetWithoutLeague()
+        {
+            return _repositoryTeam.GetWithoutLeague();
+        }
     }
 }

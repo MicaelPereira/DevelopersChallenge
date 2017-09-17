@@ -9,6 +9,6 @@ namespace Domain.Championship.Interfaces.Service
 {
     public interface IServiceTeam : IServiceBase<Team>
     {
-
+        IEnumerable<Team> GetWithoutLeague();
     }
 }

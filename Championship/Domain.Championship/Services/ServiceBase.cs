@@ -17,9 +17,9 @@ namespace Domain.Championship.Services
             _repository = repository;
         }
 
-        public void Add(TEntity obj)
+        public TEntity Add(TEntity obj)
         {
-            _repository.Add(obj);
+            return _repository.Add(obj);
         }
 
         public TEntity GetById(int id)

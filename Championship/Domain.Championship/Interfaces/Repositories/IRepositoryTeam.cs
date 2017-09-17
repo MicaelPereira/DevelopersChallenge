@@ -9,6 +9,7 @@ namespace Domain.Championship.Interfaces.Repositories
 {
     public interface IRepositoryTeam : IRepositoryBase<Team>
     {
-
+        IEnumerable<Team> GetWithoutLeague();
+        IEnumerable<Team> GetWithLeague(int idLeague);
     }
 }

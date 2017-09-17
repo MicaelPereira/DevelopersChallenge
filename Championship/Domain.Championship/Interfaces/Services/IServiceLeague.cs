@@ -9,6 +9,7 @@ namespace Domain.Championship.Interfaces.Service
 {
     public interface IServiceLeague : IServiceBase<League>
     {
-
+        League GetByIdWithTeams(int id);
+        
     }
 }

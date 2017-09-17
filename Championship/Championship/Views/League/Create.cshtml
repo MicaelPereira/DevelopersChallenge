@@ -7,10 +7,12 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formCreate" }))
 {
     @Html.AntiForgeryToken()
-    
+    @Html.HiddenFor(model => model.SumTeams)
+    @Html.HiddenFor(model => model.hdnTeamsInLeague)
+
     <div class="form-horizontal">
         <h4>League</h4>
         <hr />
@@ -24,30 +26,32 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IsRandom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsRandom)
-                    @Html.ValidationMessageFor(model => model.IsRandom, "", new { @class = "text-danger" })
-                </div>
+            <label for="exampleInputPassword1" class="control-label col-md-2">Teams</label>
+            <div class="col-md-3">
+                <ul class="list-group" style="overflow-y: scroll; overflow-x: hidden; height: 220px">
+                    @if (Model != null)
+                    {
+                        int i = 0;
+                        foreach (var item in Model.Teams)
+                        {
+                            string idChk = "chkTeams_" + i.ToString();
+                            <li class="list-group-item">
+                                <input type="checkbox" id=@idChk value=@item.Id onclick="ManageChk(id)"/> @Html.DisplayFor(modelItem => item.Name)
+                            </li>
+                            i++;
+                        }
+                    }
+                </ul>
             </div>
+            
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SumTeams, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SumTeams, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SumTeams, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" onclick="return create()" />
         </div>
+    </div>
     </div>
 }
 
@@ -58,8 +62,60 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $(function () {
-            console.log('@Url.Action("AllTeams", "Team")');
+        $("#formCreate").submit(function (e) { // note that it's better to use form Id to select form
+            if (create()) // here you check your drop down selected value
+            {
+                e.preventDefault(); // here you stop submitting form
+            }
         });
+        function create() {
+            var countTeams = $("#hdnTeamsInLeague").val().split(",").length;
+            if (countTeams % 2 != 0) {
+                alert("You can't use odd teams.");
+                return false;
+            }
+        }
+        function ManageChk(idTeam) {
+
+            var valueFromId = $("#" + idTeam + ":checkbox").val();
+            var check = function () {
+                //Put the value of hidden
+                var hdnLeague = $("#hdnTeamsInLeague").val();
+                if (hdnLeague.length > 0) {
+                    hdnLeague += "," + valueFromId;
+                }
+                else {
+                    hdnLeague = valueFromId;
+                }
+                $("#hdnTeamsInLeague").val(hdnLeague);
+            }
+
+            var uncheck = function () {
+                //remove the value of hidden
+                var uncheckedValue;
+                var chks = $("#hdnTeamsInLeague").val();
+                var arrChecks = chks.split(',');
+                for (var i = 0; i < arrChecks.length; i++) {
+                    if (arrChecks[i] != valueFromId) {
+                        if (i == 0) {
+                            uncheckedValue = arrChecks[i];
+                        }
+                        else {
+                            uncheckedValue += "," + arrChecks[i];
+                        }
+                    }
+                }
+                $("#hdnTeamsInLeague").val(uncheckedValue);
+            }
+
+            if ($("#" + idTeam + ":checkbox:checked").length > 0) {
+                check();
+            }
+            else {
+                uncheck();
+            }
+
+            
+        }
     </script>
 }
