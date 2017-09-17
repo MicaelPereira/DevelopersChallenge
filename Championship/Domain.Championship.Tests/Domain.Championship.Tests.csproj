@@ -60,8 +60,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\League.cs" />
-    <Compile Include="Services\ServiceLeague.cs" />
+    <Compile Include="Entities\LeagueTest.cs" />
+    <Compile Include="Services\ServiceTeamTest.cs" />
+    <Compile Include="Services\ServiceLeagueTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain.Championship\Domain.Championship.csproj">
