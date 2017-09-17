@@ -10,5 +10,6 @@ namespace Application.Championship.Interface
     public interface IAppServiceLeague : IAppServiceBase<League>
     {
         League GetByIdWithTeams(int id);
+        League AddWithTeams(League league);
     }
 }

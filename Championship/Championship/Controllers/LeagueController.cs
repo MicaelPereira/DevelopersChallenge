@@ -50,31 +50,18 @@ namespace Championship.Controllers
             try
             {
                 var ids = form.GetValue("hdnTeamsInLeague").AttemptedValue;
-                var teams = new List<viewModel.Team>();
+                collection.Teams = new List<viewModel.Team>();
                 
                 if (!string.IsNullOrEmpty(ids))
                 {
-                    var arrIds = ids.Split(',');
-                    foreach (var item in arrIds)
-                    {
-                        teams.Add(new viewModel.Team() { Id = int.Parse(item) });
-                    }
-                    collection.SumTeams = arrIds.Count();
+                    foreach (var item in ids.Split(','))
+                        collection.Teams.Add(new viewModel.Team() { Id = int.Parse(item) });
+
+                    collection.SumTeams = ids.Split(',').Count();
                 }
                 collection.IsRandom = false;
-                using (TransactionScope scope = new TransactionScope())
-                {
-                    var newLeague = this._appServiceLeague.Add(Mapper.Map<viewModel.League, entity.League>(collection));
-
-                    foreach (var item in teams)
-                    {
-                        var team = this._appServiceTeam.GetById(item.Id);
-                        team.IdLeague = newLeague.Id;
-                        this._appServiceTeam.Update(team);
-
-                    }
-                    scope.Complete();
-                }
+                var newLeague = this._appServiceLeague.AddWithTeams(Mapper.Map<viewModel.League, entity.League>(collection));
+                
                 return RedirectToAction("Index");
             }
             catch(Exception err)

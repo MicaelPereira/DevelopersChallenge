@@ -20,6 +20,11 @@ namespace Application.Championship
             _serviceTeam = serviceTeam;
         }
 
+        public League AddWithTeams(League league)
+        {
+            return _serviceLeague.AddWithTeams(league);
+        }
+
         public League GetByIdWithTeams(int id)
         {
             return _serviceLeague.GetByIdWithTeams(id);
