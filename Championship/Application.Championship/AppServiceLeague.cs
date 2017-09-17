@@ -24,16 +24,5 @@ namespace Application.Championship
         {
             return _serviceLeague.GetByIdWithTeams(id);
         }
-
-        //TODO:Refactory
-        //public IEnumerable<League> GetAllWithTeams()
-        //{
-        //    var leagues = _serviceLeague.GetAll();
-        //    foreach (var league in leagues)
-        //    {
-        //        league.Teams.AddRange(_serviceTeam.GetAll());
-        //    }
-        //    return leagues;
-        //}
     }
 }
